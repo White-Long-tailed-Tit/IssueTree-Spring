@@ -14,7 +14,7 @@ import java.util.List;
 
 import static lombok.AccessLevel.PROTECTED;
 
-@Document(indexName = "teams")
+@Document(indexName = "questions")
 @NoArgsConstructor(access = PROTECTED)
 @Getter
 public class Question {
