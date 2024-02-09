@@ -21,8 +21,20 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
-      - name : add ES file
-        run : echo "${{ secrets.DEV_ES }}" > ./src/main/resources/application-ES.properties
+      - name : add ES_HOST file
+        run : echo "${{ secrets.DEV_ES_HOST }}" > ./src/main/resources/application-ES.properties
+        shell : bash
+
+      - name : add ES_API_KEY file
+        run : echo "${{ secrets.DEV_ES_API_KEY }}" > ./src/main/resources/application-ES.properties
+        shell : bash
+
+      - name : add ES_USERNAME file
+        run : echo "${{ secrets.DEV_ES_USERNAME }}" > ./src/main/resources/application-ES.properties
+        shell : bash
+
+      - name : add ES_PW file
+        run : echo "${{ secrets.DEV_ES_PW }}" > ./src/main/resources/application-ES.properties
         shell : bash
 
       - name : add SLACK file
@@ -54,10 +66,9 @@ jobs:
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
 
       - name: Code Deploy To EC2 instance
-        run: aws deploy create-deployment \
-                --application-name $CODE_DEPLOY_APP_NAME \
-                --deployment-config-name CodeDeployDefault.AllAtOnce \
-                --deployment-group-name $DEPLOYMENT_GROUP_NAME \
-                --file-exists-behavior OVERWRITE \
-                --s3-location bucket=$BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip \
-                --region ap-northeast-2 \
+        run: aws deploy create-deployment
+                --application-name $CODE_DEPLOY_APP_NAME
+                --deployment-config-name CodeDeployDefault.AllAtOnce
+                --deployment-group-name $DEPLOYMENT_GROUP_NAME
+                --s3-location bucket=$BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+                --region ap-northeast-2
