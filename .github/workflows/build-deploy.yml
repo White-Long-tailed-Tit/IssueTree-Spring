@@ -22,15 +22,11 @@ jobs:
           distribution: 'adopt'
 
       - name : Set up ES.properites file
-        run : |
-          echo "elasticsearch.host=${{ secrets.DEV_ES_HOST }}" > ./src/main/resources/application-ES.properties
-          echo "elasticsearch.api-key=${{ secrets.DEV_ES_API_KEY }}" >> ./src/main/resources/application-ES.properties
-          echo "elasticsearch.username=${{ secrets.DEV_ES_USERNAME }}" >> ./src/main/resources/application-ES.properties
-          echo "elasticsearch.password=${{ secrets.DEV_ES_PW }}" >> ./src/main/resources/application-ES.properties
+        run : echo "${{ secrets.DEV_ES }}" > ./src/main/resources/application-ES.properties
         shell : bash
 
       - name : Set up SLACK.properties file
-        run : echo "slack.token=${{ secrets.DEV_SLACK }}" > ./src/main/resources/application-SLACK.properties
+        run : echo "${{ secrets.DEV_SLACK }}" > ./src/main/resources/application-SLACK.properties
         shell : bash
 
       - name: Grant execute permission for gradlew
