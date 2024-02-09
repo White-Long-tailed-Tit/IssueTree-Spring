@@ -30,7 +30,7 @@ jobs:
         shell : bash
 
       - name : Set up SLACK.properties file
-        run : echo "slack.token=${{secrets.DEV_SLACK}}" > ./src/main/resources/application-SLACK.properties
+        run : echo "slack.token=${{ secrets.DEV_SLACK }}" > ./src/main/resources/application-SLACK.properties
         shell : bash
 
       - name: Grant execute permission for gradlew
