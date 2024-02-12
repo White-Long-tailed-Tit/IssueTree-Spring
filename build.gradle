@@ -26,6 +26,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-logging:2.6.8'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	//슬랙봇
@@ -33,6 +34,7 @@ dependencies {
 	implementation("com.slack.api:bolt-servlet:1.38.0")
 	implementation("com.slack.api:bolt-jetty:1.38.0")
 	implementation("org.slf4j:slf4j-simple:1.7.36")
+	implementation("com.slack.api:slack-api-client:1.20.2")
 }
 
 tasks.named('test') {
