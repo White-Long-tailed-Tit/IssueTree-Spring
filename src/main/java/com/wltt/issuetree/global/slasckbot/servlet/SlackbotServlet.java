@@ -8,5 +8,5 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet("/solve")
 public class SlackbotServlet extends SlackAppServlet {
     public SlackbotServlet(@Qualifier("issueTree") App app){ super(app);}
-    
+
 }
