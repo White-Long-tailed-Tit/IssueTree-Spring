@@ -24,6 +24,7 @@ public class SlackbotService {
     private String channelId;
 
 
+    //연습용
     @Transactional
     public void publishMessage() {
         var client = Slack.getInstance().methods();
