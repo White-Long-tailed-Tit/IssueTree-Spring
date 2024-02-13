@@ -11,16 +11,16 @@ import java.util.Map;
 @Getter
 public class SlackUrlEncodeForm {
     private final String channelId;
-    private final String userId;
-    private final String text;
+    private final String questioner;
+    private final String issue;
 
     private String json = null;
     private Map<String, String> result = new HashMap<>();
 
     public SlackUrlEncodeForm(MultiValueMap<String, Object> data){
         this.channelId = String.valueOf(data.getFirst("channel_id"));
-        this.userId = String.valueOf(data.getFirst("user_id"));
-        this.text = String.valueOf(data.getFirst("text"));
+        this.questioner = String.valueOf(data.getFirst("user_id"));
+        this.issue = String.valueOf(data.getFirst("text"));
     }
 
     public void setResult(String responseText){
