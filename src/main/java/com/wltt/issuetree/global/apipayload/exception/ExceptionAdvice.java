@@ -22,7 +22,6 @@ import java.util.Optional;
 
 import static com.wltt.issuetree.global.apipayload.code.status.ErrorStatus._INTERNAL_SERVER_ERROR;
 
-@Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     @Override
@@ -59,6 +58,8 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         ErrorStatus errorCommonStatus = _INTERNAL_SERVER_ERROR;
         String errorPoint = e.getMessage();
         ApiResponse<Object> body = ApiResponse.onFailure(errorCommonStatus.getCode(), errorCommonStatus.getMessage(), errorPoint);
+
+        System.err.println(e.getMessage());
 
         return super.handleExceptionInternal(
                 e,
