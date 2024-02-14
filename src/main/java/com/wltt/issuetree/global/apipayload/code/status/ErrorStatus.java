@@ -16,7 +16,13 @@ public enum ErrorStatus implements BaseErrorCode {
     _INTERNAL_SERVER_ERROR(INTERNAL_SERVER_ERROR, "COMMON500", "서버 에러, 관리자에게 문의 바랍니다."),
     _BAD_REQUEST(BAD_REQUEST, "COMMON400", "잘못된 요청입니다."),
     _UNAUTHORIZED(UNAUTHORIZED, "COMMON401", "인증이 필요합니다. 권한을 확인해주세요."),
-    _FORBIDDEN(FORBIDDEN, "COMMON403", "금지된 요청입니다.");
+    _FORBIDDEN(FORBIDDEN, "COMMON403", "금지된 요청입니다."),
+
+    // slack
+    FAIL_SEND_MESSAGE(INTERNAL_SERVER_ERROR, "SLACK5000", "서버 에러, 슬랙 메세지 전송에 실패하였습니다. 관리자에게 문의 바랍니다."),
+
+
+    ;
 
 
     private final HttpStatus httpStatus;
