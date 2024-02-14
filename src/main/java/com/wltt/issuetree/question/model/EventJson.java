@@ -11,9 +11,11 @@ import java.util.Map;
 public class EventJson {
 
     private Map<String, String> event = null;
+    private Map<String, String> message = null;
     private String text = null;
     private String user = null;
     private String eventType = "N";
+    private String subType = null;
     private String channel = null;
     private String ts = null;
     private String json = null;
@@ -28,14 +30,19 @@ public class EventJson {
             if (item != null && type.equals("event_callback")){
                 this.event = (Map<String, String>)item;
                 this.eventType = event.get("type");
-                this.text = event.get("text");
-                this.user = event.get("user");
+                this.subType = event.get("subtype");
                 this.channel = event.get("channel");
-                this.ts = event.get("ts");
-                result.put("channel", channel);
-                result.put("user", user);
-                result.put("ts", ts);
-                result.put("text", text);
+                if (subType.equals("message_changed")) {
+                    Object msg = event.get("message");
+                    this.message = (Map<String, String>)msg;
+                    this.user = message.get("user");
+                    this.text = message.get("text");
+                    this.ts = message.get("ts");
+                    result.put("channel", channel);
+                    result.put("user", user);
+                    result.put("ts", ts);
+                    result.put("text", text);
+                }
             }
         }
     }
