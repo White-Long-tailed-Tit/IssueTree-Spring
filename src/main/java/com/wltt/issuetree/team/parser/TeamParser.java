@@ -20,7 +20,7 @@ public class TeamParser {
 
     private static String parseChannelId(String input) {
         int startIndex = input.indexOf("<#") + 2;
-        int endIndex = input.indexOf(">");
+        int endIndex = input.indexOf("|"); // <#id|> : |를 endIndex로 설정함
         return input.substring(startIndex, endIndex).trim();
     }
 
