@@ -1,5 +1,6 @@
 package com.wltt.issuetree.team.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -20,14 +21,17 @@ public class Team {
     private Long id;
 
     @Field(type = FieldType.Keyword)
-    private String name;
-
-    @Field(type = FieldType.Keyword)
     private String channelId;
 
     @Field(type = FieldType.Keyword)
-    private String channelName;
+    private List<String> packageList = new ArrayList<>();
 
-    @Field(type = FieldType.Nested)
-    private List<String> roleList = new ArrayList<>();
+    @Builder(builderMethodName = "of")
+    public Team(
+            final String channelId,
+            final List<String> packageList
+    ) {
+        this.channelId = channelId;
+        this.packageList = packageList;
+    }
 }
