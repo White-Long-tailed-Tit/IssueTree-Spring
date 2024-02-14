@@ -18,6 +18,6 @@ public class ReportController {
     public void reportIssue(
             @RequestBody final ReportCreationRequest request
     ) {
-        reportService.reportIssue(request);
+//        reportService.reportIssue(request);
     }
 }

@@ -21,27 +21,17 @@ public class Team {
     private Long id;
 
     @Field(type = FieldType.Keyword)
-    private String name;
-
-    @Field(type = FieldType.Keyword)
     private String channelId;
 
     @Field(type = FieldType.Keyword)
-    private String channelName;
-
-    @Field(type = FieldType.Nested)
     private List<String> packageList = new ArrayList<>();
 
     @Builder(builderMethodName = "of")
     public Team(
-            final String name,
             final String channelId,
-            final String channelName,
             final List<String> packageList
     ) {
-        this.name = name;
         this.channelId = channelId;
-        this.channelName = channelName;
         this.packageList = packageList;
     }
 }
