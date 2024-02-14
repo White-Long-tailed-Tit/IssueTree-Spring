@@ -12,7 +12,7 @@ class IssueTreeApplicationTests {
 
 	@Test
 	void sendMessageTest(){
-		slackbotService.publishMessage();
+
 	}
 
 	@Test

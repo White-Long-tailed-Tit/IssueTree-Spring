@@ -4,8 +4,13 @@ import com.wltt.issuetree.question.domain.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
+/*@Service
 @RequiredArgsConstructor
 public class QuestionService {
-    private final QuestionRepository questionRepository;
+    //private final QuestionRepository questionRepository;
+
+*//*
+    public void String appMentionResponse(String text) {
+    }
 }
+*/
