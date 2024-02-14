@@ -11,14 +11,14 @@ public class TeamCreationRequest {
     private String name;
     private String teamChannelId;
     private String teamChannelName;
-    private List<String> roleList;
+    private List<String> packageList;
 
     public Team toEntity() {
         return Team.of()
                 .name(name)
                 .channelId(teamChannelId)
                 .channelName(teamChannelName)
-                .roleList(roleList)
+                .packageList(packageList)
                 .build();
     }
 }

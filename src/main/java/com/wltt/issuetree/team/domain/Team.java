@@ -30,13 +30,18 @@ public class Team {
     private String channelName;
 
     @Field(type = FieldType.Nested)
-    private List<String> roleList = new ArrayList<>();
+    private List<String> packageList = new ArrayList<>();
 
     @Builder(builderMethodName = "of")
-    public Team(String name, String channelId, String channelName, List<String> roleList) {
+    public Team(
+            final String name,
+            final String channelId,
+            final String channelName,
+            final List<String> packageList
+    ) {
         this.name = name;
         this.channelId = channelId;
         this.channelName = channelName;
-        this.roleList = roleList;
+        this.packageList = packageList;
     }
 }

@@ -1,5 +1,6 @@
 package com.wltt.issuetree.question.domain;
 
+import com.wltt.issuetree.global.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -17,7 +18,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Document(indexName = "questions")
 @NoArgsConstructor(access = PROTECTED)
 @Getter
-public class Question {
+public class Question extends BaseEntity {
     @Id
     private Long id;
 
