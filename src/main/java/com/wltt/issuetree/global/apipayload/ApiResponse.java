@@ -10,6 +10,7 @@ import com.wltt.issuetree.global.apipayload.code.ReasonDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import static com.wltt.issuetree.global.apipayload.code.status.SuccessStatus._NO_CONTENT;
 import static com.wltt.issuetree.global.apipayload.code.status.SuccessStatus._OK;
 
 @Getter
@@ -30,6 +31,9 @@ public class ApiResponse<T> {
         return new ApiResponse<>(true, _OK.getCode(), _OK.getMessage(), result);
     }
 
+    public static <T> ApiResponse<T> onSuccess() {
+        return new ApiResponse<>(true, _NO_CONTENT.getCode(), _NO_CONTENT.getMessage(), null);
+    }
 
     public static <T> ApiResponse<T> of(BaseCode code) {
         final ReasonDTO reasonDTO = code.getReasonHttpStatus();

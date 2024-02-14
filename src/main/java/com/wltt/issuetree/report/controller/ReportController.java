@@ -1,5 +1,6 @@
 package com.wltt.issuetree.report.controller;
 
+import com.wltt.issuetree.global.apipayload.ApiResponse;
 import com.wltt.issuetree.report.request.ReportCreationRequest;
 import com.wltt.issuetree.report.service.ReportService;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +16,10 @@ public class ReportController {
     private final ReportService reportService;
 
     @PostMapping("")
-    public void reportIssue(
+    public ApiResponse<Void> reportIssue(
             @RequestBody final ReportCreationRequest request
     ) {
-//        reportService.reportIssue(request);
+        reportService.reportIssue(request);
+        return ApiResponse.onSuccess();
     }
 }

@@ -5,13 +5,18 @@ import lombok.Data;
 
 @Data
 public class ReportCreationRequest {
-    private String reporterId;
+    private String reporterName;
     private String packageName;
+    private String errorMessage;
     private String comment;
+    private String stack;
+    private String version;
 
     public Report toEntity() {
         return Report.of()
-                .reporterId(reporterId)
+                .stack(stack)
+                .errorMessage(errorMessage)
+                .version(version)
                 .packageName(packageName)
                 .comment(comment)
                 .build();
