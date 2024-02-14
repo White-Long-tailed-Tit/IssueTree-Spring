@@ -21,8 +21,8 @@ public enum ErrorStatus implements BaseErrorCode {
     // slack
     FAIL_SEND_MESSAGE(INTERNAL_SERVER_ERROR, "SLACK5000", "서버 에러, 슬랙 메세지 전송에 실패하였습니다. 관리자에게 문의 바랍니다."),
 
-
-    ;
+    // report
+    FAIL_SEARCH_TEAM(BAD_REQUEST, "REPORT4000", "검색한 패키지에 배정된 팀이 존재하지 않습니다. 슬랙의 `/역할확인` 명령어를 통해 역할을 확인해주세요.");
 
 
     private final HttpStatus httpStatus;

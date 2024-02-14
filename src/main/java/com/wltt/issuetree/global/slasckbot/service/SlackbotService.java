@@ -14,6 +14,7 @@ import java.util.List;
 
 import static com.slack.api.model.block.Blocks.*;
 import static com.slack.api.model.block.Blocks.section;
+import static com.slack.api.model.block.composition.BlockCompositions.markdownText;
 import static com.slack.api.model.block.composition.BlockCompositions.plainText;
 
 @Service
@@ -36,6 +37,29 @@ public class SlackbotService {
                                 section(section -> section.fields(textObjectList))
                         )
                 ).build();
+        try {
+            methodsClient.chatPostMessage(messageRequest);
+        } catch (SlackApiException | IOException e) {
+            throw new GeneralException(ErrorStatus._INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public void chatMessage(
+            final String text,
+            final String headerContent,
+            final String channelNameOrId
+    ) {
+        ChatPostMessageRequest messageRequest = ChatPostMessageRequest.builder()
+                .channel(channelNameOrId)
+                .blocks(asBlocks(
+                                header(
+                                        header -> header.text(plainText(headerContent))
+                                ),
+                                divider(),
+                                section(s -> s.text(markdownText(text)))
+                        )
+                )
+                .build();
         try {
             methodsClient.chatPostMessage(messageRequest);
         } catch (SlackApiException | IOException e) {
