@@ -5,15 +5,13 @@ import lombok.Data;
 
 @Data
 public class ReportCreationRequest {
-    private String reporterName;
-    private String reporterTeamName;
+    private String reporterId;
     private String packageName;
     private String comment;
 
     public Report toEntity() {
         return Report.of()
-                .reporterName(reporterName)
-                .reporterTeamName(reporterTeamName)
+                .reporterId(reporterId)
                 .packageName(packageName)
                 .comment(comment)
                 .build();

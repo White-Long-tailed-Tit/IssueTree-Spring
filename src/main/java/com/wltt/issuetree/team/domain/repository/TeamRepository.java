@@ -4,7 +4,7 @@ import com.wltt.issuetree.global.elasticsearch.repository.ElasticsearchRepositor
 import com.wltt.issuetree.team.domain.Team;
 import org.springframework.data.elasticsearch.annotations.Query;
 
-public interface TeamRepository extends ElasticsearchRepository<Team, Long> {
+public interface TeamRepository extends ElasticsearchRepository<Team, String> {
     @Query("") // TODO: 쿼리 작성하기
     Team findByPackageName(String packageName);
 }

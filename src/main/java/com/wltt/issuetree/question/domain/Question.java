@@ -20,7 +20,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 public class Question extends BaseEntity {
     @Id
-    private Long id;
+    private String id;
 
     @Field(type = FieldType.Keyword)
     private String stack;
@@ -28,12 +28,11 @@ public class Question extends BaseEntity {
     @Field(type = FieldType.Keyword)
     private String version;
 
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "uuuu-MM-dd'T'HH:mm:ss.SSSZZ")
-    private LocalDateTime createdDate;
-
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "uuuu-MM-dd'T'HH:mm:ss.SSSZZ")
-    private LocalDateTime lastModifiedDate;
-
-    @Field(type = FieldType.Nested)
+    @Field(type = FieldType.Keyword)
     private List<String> messageList = new ArrayList<>();
+
+    @Override
+    public boolean isNew() {
+        return id == null || (getCreatedDate() == null);
+    }
 }

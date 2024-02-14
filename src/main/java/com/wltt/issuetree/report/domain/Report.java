@@ -14,11 +14,9 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 public class Report extends BaseEntity {
     @Id
-    private Long id;
+    private String id;
 
-    private String reporterName;
-
-    private String reporterTeamName;
+    private String reporterId;
 
     private String packageName;
 
@@ -26,14 +24,17 @@ public class Report extends BaseEntity {
 
     @Builder(builderMethodName = "of")
     public Report(
-            final String reporterName,
-            final String reporterTeamName,
+            final String reporterId,
             final String packageName,
             final String comment
     ) {
-        this.reporterName = reporterName;
-        this.reporterTeamName = reporterTeamName;
+        this.reporterId = reporterId;
         this.packageName = packageName;
         this.comment = comment;
+    }
+
+    @Override
+    public boolean isNew() {
+        return id == null || (getCreatedDate() == null);
     }
 }
