@@ -112,6 +112,19 @@ public class QuestionService {
         }
     }
 
+    private String extractSolves(List<Message> messages) throws SlackApiException, IOException {
+        int size = messages.size();
+        StringBuilder resultBuilder = new StringBuilder();
+        for (int i = 1; i<size; i++){
+            Message message = messages.get(i);
+            String text = message.getText();
+            String userName = findUserName(message.getUser());
+            resultBuilder.append(userName).append(" : ").append(text).append("\n");
+        }
+        String result = resultBuilder.toString();
+        return result;
+    }
+
 
 
 }
