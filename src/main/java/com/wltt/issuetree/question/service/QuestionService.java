@@ -63,6 +63,39 @@ public class QuestionService {
         return null;
     }
 
+    private Question CreateQuestion(ConversationsRepliesResponse repliesResponse, String ts) throws SlackApiException, IOException {
+        List<Message> messages = repliesResponse.getMessages();
+        Message msg = messages.get(0);
+        if (msg != null && msg.getBotId().equals(botId)) {
+
+            String stack = extractTextFromMessage(msg, "[ 스택 ]");
+            String version = extractTextFromMessage(msg, "[ 버전 ]");
+            String issue = extractTextFromMessage(msg, "[ 내용 ]");
+            String questioner = findUserName(extractTextFromMessage(msg, "[ 보낸 사람 ]"));
+            String solve = summarizeMessages(extractSolves(messages));
+
+
+
+            Question question = Question.builder()
+                    .stack(stack)
+                    .version(version)
+                    .issue(issue)
+                    .questioner(questioner)
+                    .solve(solve)
+                    .ts(ts)
+                    .build();
+
+            questionRepository.save(question);
+            return question;
+        } else {
+            if (msg == null)
+                throw new RuntimeException("msg가 없습니다.");
+            else {
+                throw new RuntimeException("해당 워크플로우 메세지가 아닙니다.");
+            }
+        }
+    }
+
 
 
 }
