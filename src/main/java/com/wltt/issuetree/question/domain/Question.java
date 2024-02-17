@@ -1,6 +1,7 @@
 package com.wltt.issuetree.question.domain;
 
 import com.wltt.issuetree.global.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -29,10 +30,30 @@ public class Question extends BaseEntity {
     private String version;
 
     @Field(type = FieldType.Keyword)
-    private List<String> messageList = new ArrayList<>();
+    private String issue;
+
+    @Field(type = FieldType.Keyword)
+    private String questioner;
+
+    @Field(type = FieldType.Keyword)
+    private String solve;
+
+    @Field(type = FieldType.Keyword)
+    private String ts;
+
+    @Builder
+    public Question(String stack, String version, String issue, String questioner, String solve, String ts){
+        this.stack = stack;
+        this.version = version;
+        this.issue = issue;
+        this.questioner = questioner;
+        this.solve = solve;
+        this.ts = ts;
+    }
 
     @Override
     public boolean isNew() {
         return id == null || (getCreatedDate() == null);
     }
+
 }
