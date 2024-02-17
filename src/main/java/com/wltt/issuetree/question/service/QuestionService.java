@@ -164,6 +164,28 @@ public class QuestionService {
         }
     }
 
+    private String extractSummaryFromResponse(String responseBody) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode rootNode = objectMapper.readTree(responseBody);
+            JsonNode choicesNode = rootNode.get("choices");
+
+            if (choicesNode.isArray() && choicesNode.size() > 0) {
+                JsonNode assistantChoice = choicesNode.get(0);  // Assuming the assistant's reply is the first choice
+                JsonNode contentNode = assistantChoice.get("message").get("content");
+
+                if (contentNode != null) {
+                    return contentNode.asText();
+                }
+            }
+
+            return "응답에서 요약을 찾을 수 없습니다.";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "JSON 응답을 구문 분석하는 중 오류가 발생했습니다.";
+        }
+    }
+
 
 
 }
