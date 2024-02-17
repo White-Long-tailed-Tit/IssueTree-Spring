@@ -8,6 +8,7 @@ build/
 ## key files
 application-ES.properties
 application-SLACK.properties
+application-OPENAI.properties
 
 ### STS ###
 .apt_generated

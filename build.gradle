@@ -30,7 +30,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	//슬랙봇
-
 	implementation("com.slack.api:bolt:1.38.0")
 	implementation("com.slack.api:bolt-servlet:1.38.0")
 	implementation("com.slack.api:bolt-jetty:1.38.0")
@@ -38,6 +37,10 @@ dependencies {
 	implementation("com.slack.api:bolt:1.18.0")
 	implementation("com.slack.api:bolt-servlet:1.18.0")
 	implementation("com.slack.api:bolt-jetty:1.18.0")
+
+	//OpenAI
+	implementation 'ai.openai:gpt-3.5-turbo:1.1.0'
+
 }
 
 tasks.named('test') {
