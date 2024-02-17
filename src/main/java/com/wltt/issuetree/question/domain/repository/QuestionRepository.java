@@ -4,4 +4,5 @@ import com.wltt.issuetree.global.elasticsearch.repository.ElasticsearchRepositor
 import com.wltt.issuetree.question.domain.Question;
 
 public interface QuestionRepository extends ElasticsearchRepository<Question, Long> {
+    boolean existsByTs(String ts);
 }
