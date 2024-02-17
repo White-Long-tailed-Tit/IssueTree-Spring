@@ -52,6 +52,16 @@ public class QuestionService {
         return question;
     }
 
+    private String extractTextFromMessage(Message message, String field) {
+
+        String[] lines = message.getText().split("\n");
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i].contains(field)) {
+                return lines[i + 1].trim();
+            }
+        }
+        return null;
+    }
 
 
 
