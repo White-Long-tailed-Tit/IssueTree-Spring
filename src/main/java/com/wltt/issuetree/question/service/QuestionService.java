@@ -96,6 +96,22 @@ public class QuestionService {
         }
     }
 
+    private String findUserName(String userId) throws SlackApiException, IOException {
+        Pattern pattern = Pattern.compile("<@(.*?)>");
+        Matcher matcher = pattern.matcher(userId);
+
+        if (matcher.find()) {
+            userId = matcher.group(1);
+        }
+        UsersInfoResponse response = methodsClient.usersInfo(UsersInfoRequest.builder().user(userId).build());
+        if (response.isOk()) {
+            return response.getUser().getRealName();
+        } else {
+            System.err.println("사용자 이름 탐색에 실패하였습니다." );
+            return null;
+        }
+    }
+
 
 
 }
