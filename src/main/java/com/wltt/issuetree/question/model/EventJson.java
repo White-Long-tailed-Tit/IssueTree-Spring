@@ -14,6 +14,7 @@ public class EventJson {
     private Map<String, String> message = null;
     private String text = null;
     private String user = null;
+    private String eventId = null;
     private String eventType = "N";
     private String subType = null;
     private String channel = null;
@@ -29,19 +30,14 @@ public class EventJson {
             Object item = data.get("event");
             if (item != null && type.equals("event_callback")){
                 this.event = (Map<String, String>)item;
-                this.eventType = event.get("type");
                 this.subType = event.get("subtype");
                 this.channel = event.get("channel");
                 if (subType.equals("message_changed")) {
                     Object msg = event.get("message");
                     this.message = (Map<String, String>)msg;
-                    this.user = message.get("user");
-                    this.text = message.get("text");
                     this.ts = message.get("ts");
                     result.put("channel", channel);
-                    result.put("user", user);
                     result.put("ts", ts);
-                    result.put("text", text);
                 }
             }
         }
@@ -55,4 +51,5 @@ public class EventJson {
         ObjectMapper objectMapper = new ObjectMapper();
         this.json = objectMapper.writeValueAsString(result);
     }
+
 }
