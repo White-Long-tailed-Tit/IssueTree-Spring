@@ -125,6 +125,45 @@ public class QuestionService {
         return result;
     }
 
+    private String summarizeMessages(String messages) {
+        String url = "https://api.openai.com/v1/chat/completions";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(openaiApiKey);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode requestBodyNode = objectMapper.createObjectNode();
+        requestBodyNode.put("model", "gpt-4");
+        ArrayNode messagesArrayNode = requestBodyNode.putArray("messages");
+
+        ObjectNode ObjectNode1 = objectMapper.createObjectNode();
+        ObjectNode1.put("role", "system");
+        ObjectNode1.put("content", "You are a helpful assistant.");
+        messagesArrayNode.add(ObjectNode1);
+
+        ObjectNode ObjectNode2 = objectMapper.createObjectNode();
+        ObjectNode2.put("role", "user");
+        ObjectNode2.put("content", messages + "를 요약해줘. 대신 링크는 그대로 두어줘. 코드도 그대로 두어줘. 말투는 공식문서처럼 한국어로 해줘. 의견을 제기한 이름도 넣어줘.");
+        messagesArrayNode.add(ObjectNode2);
+
+
+        try {
+            String requestBody = objectMapper.writeValueAsString(requestBodyNode);
+
+            HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+            ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+
+            if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                return extractSummaryFromResponse(responseEntity.getBody());
+            } else {
+                return "Messgaes를 요약하는 데에 실패하였습니다. Status code : " + responseEntity.getStatusCodeValue();
+            }
+        } catch (JsonProcessingException e) {
+            return "Json Parsing에 실패하였습니다. " + e.getMessage();
+        }
+    }
+
 
 
 }
