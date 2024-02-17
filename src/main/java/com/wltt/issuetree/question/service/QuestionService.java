@@ -186,6 +186,10 @@ public class QuestionService {
         }
     }
 
+    public boolean isTsExist(String ts){
+        return questionRepository.existsByTs(ts);
+    }
+
 
 
 }
