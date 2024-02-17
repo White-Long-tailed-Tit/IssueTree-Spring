@@ -4,10 +4,15 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/issueTree
+    overwrite: yes
+file_exists_behavior: OVERWRITE
+
 permissions:
-  - object: /home/ubuntu/issueTree/
+  - object: /
+    pattern: "**"
     owner: ubuntu
     group: ubuntu
+
 hooks:
   AfterInstall:
     - location: scripts/deploy.sh

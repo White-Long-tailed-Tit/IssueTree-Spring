@@ -1,5 +1,6 @@
 package com.wltt.issuetree.team.domain;
 
+import com.wltt.issuetree.global.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,9 @@ import static lombok.AccessLevel.PROTECTED;
 @Document(indexName = "teams")
 @NoArgsConstructor(access = PROTECTED)
 @Getter
-public class Team {
+public class Team extends BaseEntity {
     @Id
-    private Long id;
+    private String id;
 
     @Field(type = FieldType.Keyword)
     private String channelId;
@@ -33,5 +34,10 @@ public class Team {
     ) {
         this.channelId = channelId;
         this.packageList = packageList;
+    }
+
+    @Override
+    public boolean isNew() {
+        return id == null || (getCreatedDate() == null);
     }
 }
