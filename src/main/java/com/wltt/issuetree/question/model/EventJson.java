@@ -27,6 +27,7 @@ public class EventJson {
         if (type.equals("url_verification")){
             result.put("challenge", String.valueOf(data.get("challenge")));
         } else {
+            System.out.println("여기도가니?");
             Object item = data.get("event");
             if (item != null && type.equals("event_callback")){
                 this.event = (Map<String, String>)item;

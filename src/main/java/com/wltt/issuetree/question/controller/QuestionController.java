@@ -29,10 +29,9 @@ public class QuestionController {
     public ResponseEntity<?> eventHandle(@RequestBody Map<String, Object> data) {
         try {
             EventJson eventJson = new EventJson(data);
-            log.info("sub type:" + eventJson.getSubType());
             eventJson.setJson();
             String ts = eventJson.getTs();
-            if (eventJson.getSubType().equals("message_changed")) {
+            if (eventJson.getSubType()!=null && eventJson.getSubType().equals("message_changed")) {
                 if (questionService.isTsExist(ts)) {
                     log.info("이미 처리된 이벤트입니다. 중복 이벤트를 건너뛰고 있습니다.", ts);
                     return ResponseEntity.ok().body("중복된 이벤트입니다. 이미 처리되었습니다.");
@@ -40,7 +39,7 @@ public class QuestionController {
                 questionService.appMentionResponse(ts, eventJson.getChannel());
             }
 
-            return ResponseEntity.ok().body("Event 처리가 완료되었습니다.");
+            return new ResponseEntity<>(eventJson.getJson(), HttpStatus.OK);
 
         } catch (SlackApiException e) {
             throw new RuntimeException(e);

@@ -85,6 +85,12 @@ public class QuestionService {
                     .ts(ts)
                     .build();
 
+            System.out.println("스택: "+stack);
+            System.out.println("버전: "+version);
+            System.out.println("이슈: "+issue);
+            System.out.println("질문자: " + questioner);
+            System.out.println("해결: "+solve);
+
             questionRepository.save(question);
             return question;
         } else {
