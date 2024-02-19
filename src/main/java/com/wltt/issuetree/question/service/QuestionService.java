@@ -23,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,8 +75,6 @@ public class QuestionService {
             String questioner = findUserName(extractTextFromMessage(msg, "[ 보낸 사람 ]"));
             String solve = summarizeMessages(extractSolves(messages));
 
-
-
             Question question = Question.builder()
                     .stack(stack)
                     .version(version)
@@ -84,12 +83,6 @@ public class QuestionService {
                     .solve(solve)
                     .ts(ts)
                     .build();
-
-            System.out.println("스택: "+stack);
-            System.out.println("버전: "+version);
-            System.out.println("이슈: "+issue);
-            System.out.println("질문자: " + questioner);
-            System.out.println("해결: "+solve);
 
             questionRepository.save(question);
             return question;
@@ -184,7 +177,6 @@ public class QuestionService {
                     return contentNode.asText();
                 }
             }
-
             return "응답에서 요약을 찾을 수 없습니다.";
         } catch (Exception e) {
             e.printStackTrace();
@@ -192,8 +184,11 @@ public class QuestionService {
         }
     }
 
-    public boolean isTsExist(String ts){
-        return questionRepository.existsByTs(ts);
+
+
+    public boolean isTsExist(String ts) {
+        Optional<Question> optionalQuestion = questionRepository.findByTs(ts);
+        return optionalQuestion.isPresent();
     }
 
 
