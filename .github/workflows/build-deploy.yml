@@ -29,6 +29,10 @@ jobs:
       - name : Set up SLACK.properties file
         run : echo "${{ secrets.DEV_SLACK }}" > ./src/main/resources/application-SLACK.properties
         shell : bash
+        
+      - name : Set up OPENAI.properties file
+        run : echo "${{ secrets.DEV_OPENAI }}" > ./src/main/resources/application-OPENAI.properties
+        shell : bash
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
