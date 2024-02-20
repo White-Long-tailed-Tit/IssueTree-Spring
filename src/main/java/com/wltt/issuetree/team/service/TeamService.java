@@ -47,7 +47,7 @@ public class TeamService {
         String header = "정상적으로 역할이 지정되었습니다.";
 
         slackbotService.chatMessage(
-                textObjects,
+                textObjects.toString(),
                 header,
                 request.getChannelName()
         );
@@ -55,7 +55,7 @@ public class TeamService {
         header = "새로운 역할이 지정되었습니다.";
 
         slackbotService.chatMessage(
-                textObjects,
+                textObjects.toString(),
                 header,
                 team.getChannelId()
         );
