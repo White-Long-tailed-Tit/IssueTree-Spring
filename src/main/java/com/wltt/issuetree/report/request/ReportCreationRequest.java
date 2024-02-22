@@ -8,6 +8,7 @@ public class ReportCreationRequest {
     private String reporterName;
     private String packageName;
     private String errorMessage;
+    private String managerGithubId;
     private String comment;
     private String stack;
     private String version;

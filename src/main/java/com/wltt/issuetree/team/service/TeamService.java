@@ -1,6 +1,5 @@
 package com.wltt.issuetree.team.service;
 
-import com.slack.api.methods.MethodsClient;
 import com.slack.api.model.block.composition.TextObject;
 import com.wltt.issuetree.global.SlackUrlEncodedForm;
 import com.wltt.issuetree.global.slasckbot.service.SlackbotService;
@@ -19,7 +18,6 @@ import static com.slack.api.model.block.composition.BlockCompositions.markdownTe
 @RequiredArgsConstructor
 public class TeamService {
     private final TeamRepository teamRepository;
-    private final MethodsClient methodsClient;
     private final SlackbotService slackbotService;
 
     public void addTeam(SlackUrlEncodedForm request) {
@@ -47,7 +45,7 @@ public class TeamService {
         String header = "정상적으로 역할이 지정되었습니다.";
 
         slackbotService.chatMessage(
-                textObjects.toString(),
+                textObjects,
                 header,
                 request.getChannelName()
         );
@@ -55,7 +53,7 @@ public class TeamService {
         header = "새로운 역할이 지정되었습니다.";
 
         slackbotService.chatMessage(
-                textObjects.toString(),
+                textObjects,
                 header,
                 team.getChannelId()
         );
