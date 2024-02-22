@@ -18,16 +18,16 @@ public class TeamParser {
                 .build();
     }
 
-    private static String parseChannelId(String input) {
-        int startIndex = input.indexOf("<#") + 2;
-        int endIndex = input.indexOf("|"); // <#id|> : |를 endIndex로 설정함
-        return input.substring(startIndex, endIndex).trim();
+    public static String parseChannelId(String text) {
+        int startIndex = text.indexOf("<#") + 2;
+        int endIndex = text.indexOf("|"); // <#id|> : |를 endIndex로 설정함
+        return text.substring(startIndex, endIndex).trim();
     }
 
-    private static List<String> parsePackageList(String input) {
-        int endIndex = input.indexOf(">");
+    public static List<String> parsePackageList(String text) {
+        int endIndex = text.indexOf(">");
 
-        String[] packages = input.substring(endIndex + 2).split("\\s+");
+        String[] packages = text.substring(endIndex + 2).split("\\s+");
         List<String> packageList = new ArrayList<>();
 
         for (String packageName : packages) {

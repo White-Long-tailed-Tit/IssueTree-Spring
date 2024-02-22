@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface UserRepository extends ElasticsearchRepository<User, String> {
     Optional<User> findByGithubId(String githubId);
+
+    Optional<User> findBySlackId(String slackId);
 }

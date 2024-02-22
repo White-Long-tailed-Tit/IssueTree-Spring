@@ -26,4 +26,26 @@ public class TeamController {
     ) {
         teamService.addTeam(new SlackUrlEncodedForm(data));
     }
+
+    @PostMapping(
+            value = "/search",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void searchTeams(
+            @RequestBody final MultiValueMap<String, Object> data
+    ) {
+        teamService.searchTeam(new SlackUrlEncodedForm(data));
+    }
+
+    @PostMapping(
+            value = "/delete",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void deleteTeams(
+            @RequestBody final MultiValueMap<String, Object> data
+    ) {
+        teamService.deleteTeam(new SlackUrlEncodedForm(data));
+    }
 }

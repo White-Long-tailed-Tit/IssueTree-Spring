@@ -13,4 +13,8 @@ public class UserParser {
                 .githubId(githubId)
                 .build();
     }
+
+    public static String parseGithubId(final SlackUrlEncodedForm request) {
+        return request.getText();
+    }
 }

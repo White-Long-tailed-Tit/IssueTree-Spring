@@ -4,6 +4,7 @@ import com.wltt.issuetree.global.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -19,6 +20,7 @@ public class User extends BaseEntity {
     private String id;
 
     @Field(type = FieldType.Keyword)
+    @Setter
     private String githubId;
 
     @Field(type = FieldType.Keyword)
