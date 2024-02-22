@@ -77,6 +77,8 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         ApiResponse<Object> body = ApiResponse.onFailure(errorReasonDTO.getCode(), errorReasonDTO.getMessage(), null);
         final ServletWebRequest webRequest = new ServletWebRequest(request);
 
+        System.err.println(generalException.getMessage());
+
         return super.handleExceptionInternal(
                 generalException,
                 body,
