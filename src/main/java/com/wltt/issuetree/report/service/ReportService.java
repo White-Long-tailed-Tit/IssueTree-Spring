@@ -40,6 +40,8 @@ public class ReportService {
         String text
                 = "*요청자:*\n" +
                 ">" + request.getReporterName() + "\n\n" +
+                "*담당자:*\n" +
+                "><@" + user.getSlackId() + ">\n\n" +
                 "*스택 및 버전:*\n" +
                 ">" + request.getStack() + "  " + request.getVersion() + "\n\n" +
                 "*에러 메세지 전문:*\n" +
