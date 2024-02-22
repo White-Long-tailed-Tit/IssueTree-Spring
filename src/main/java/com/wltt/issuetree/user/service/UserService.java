@@ -22,15 +22,14 @@ public class UserService {
 
         final String header = "정상적으로 깃허브 아이디가 등록되었습니다.";
         String content
-                = "*요청자:*\n" +
-                ">" + "<@" + slackUrlEncodedForm.getUserId() + ">\n" +
-                "*저장된 깃허브 아이디:*\n" +
+                =
+                "*깃허브 아이디:*\n" +
                 ">" + slackUrlEncodedForm.getText() + "\n";
 
         slackbotService.chatMessage(
                 content,
                 header,
-                slackUrlEncodedForm.getChannelId()
+                slackUrlEncodedForm.getUserId()
         );
     }
 }

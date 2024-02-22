@@ -8,6 +8,8 @@ import com.wltt.issuetree.report.domain.repository.ReportRepository;
 import com.wltt.issuetree.report.request.ReportCreationRequest;
 import com.wltt.issuetree.team.domain.Team;
 import com.wltt.issuetree.team.domain.repository.TeamRepository;
+import com.wltt.issuetree.user.domain.User;
+import com.wltt.issuetree.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +18,25 @@ import org.springframework.stereotype.Service;
 public class ReportService {
     private final ReportRepository reportRepository;
     private final TeamRepository teamRepository;
+    private final UserRepository userRepository;
     private final SlackbotService slackbotService;
 
     public void reportIssue(ReportCreationRequest request) {
         final Report report = request.toEntity();
         reportRepository.save(report);
+        final User user = userRepository.findByGithubId(request.getManagerGithubId()).orElse(null);
         final Team team = teamRepository.findByPackageListIsContaining(request.getPackageName())
                 .orElseThrow(
                         () -> new NotFoundTeamException(ErrorStatus.FAIL_SEARCH_TEAM)
                 );
-        sendReportMessage(team, request);
+        sendReportMessage(user, team, request);
     }
 
-    private void sendReportMessage(Team team, ReportCreationRequest request) {
+    private void sendReportMessage(
+            final User user,
+            final Team team,
+            final ReportCreationRequest request
+    ) {
         String text
                 = "*요청자:*\n" +
                 ">" + request.getReporterName() + "\n\n" +
@@ -42,5 +50,6 @@ public class ReportService {
         String header = "새로운 오류 해결 요청이 들어왔습니다.";
 
         slackbotService.chatMessage(text, header, team.getChannelId());
+        slackbotService.chatMessage(text, header, user.getSlackId());
     }
 }

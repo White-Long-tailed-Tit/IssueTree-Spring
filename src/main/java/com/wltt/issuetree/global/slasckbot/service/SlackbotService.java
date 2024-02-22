@@ -8,7 +8,9 @@ import com.slack.api.model.block.composition.TextObject;
 import com.wltt.issuetree.global.apipayload.code.status.ErrorStatus;
 import com.wltt.issuetree.global.apipayload.exception.GeneralException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,13 +24,16 @@ import static com.slack.api.model.block.composition.BlockCompositions.plainText;
 public class SlackbotService {
     private final MethodsClient methodsClient;
 
+    @Value("${slack.token}")
+    private String slackToken;
+
     public void chatMessage(
             final String text,
             final String headerContent,
-            final String channelNameOrId
+            final String channelNameOrIdOrUserId
     ) {
         ChatPostMessageRequest messageRequest = ChatPostMessageRequest.builder()
-                .channel(channelNameOrId)
+                .channel(channelNameOrIdOrUserId)
                 .blocks(asBlocks(
                                 header(
                                         header -> header.text(plainText(headerContent))
@@ -48,10 +53,10 @@ public class SlackbotService {
     public void chatMessage(
             final List<TextObject> textObjectList,
             final String headerContent,
-            final String channelNameOrId
+            final String channelNameOrIdOrUserId
     ) {
         ChatPostMessageRequest messageRequest = ChatPostMessageRequest.builder()
-                .channel(channelNameOrId)
+                .channel(channelNameOrIdOrUserId)
                 .blocks(asBlocks(
                                 header(
                                         header -> header.text(plainText(headerContent))
