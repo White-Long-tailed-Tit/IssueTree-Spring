@@ -41,10 +41,8 @@ public class QuestionController {
                     return ResponseEntity.status(HttpStatus.CONFLICT).body("중복된 이벤트입니다. 이미 처리되었습니다.");
                 }
                 questionService.appMentionResponse(ts, eventJson.getChannel());
-                return new ResponseEntity<>(eventJson.getJson(), HttpStatus.OK);
             }
-            else
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("편집된 메세지가 아닙니다.");
+                return new ResponseEntity<>(eventJson.getJson(), HttpStatus.OK);
 
         } catch (SlackApiException e) {
             throw new RuntimeException(e);
